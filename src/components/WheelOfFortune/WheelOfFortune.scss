@@ -1,0 +1,227 @@
+// Variables
+$primary-color: #667eea;
+$secondary-color: #764ba2;
+$gold-color: #ffd700;
+$white: #fff;
+$shadow-medium: rgba(0, 0, 0, 0.3);
+
+// Block
+.wheel-of-fortune {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+  padding: 20px;
+  font-family: "Arial", sans-serif;
+  box-sizing: border-box;
+
+  // Element: Title
+  &__title {
+    color: $white;
+    margin-bottom: 40px;
+    font-size: clamp(1.5rem, 5vw, 2.5rem);
+    text-shadow: 2px 2px 4px $shadow-medium;
+    text-align: center;
+    width: 100%;
+  }
+
+  // Element: Game Area
+  &__game-area {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+  }
+
+  // Element: Pointer
+  &__pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 40px solid $gold-color;
+    z-index: 500;
+    filter: drop-shadow(0 3px 6px $shadow-medium);
+  }
+
+  // Element: Wheel Wrapper
+  &__wheel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: 0 10px 40px $shadow-medium;
+  }
+
+  // Element: Wheel (SVG)
+  &__wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    transition: none;
+
+    // Modifier: Spinning
+    &--spinning {
+      transition: transform 4s cubic-bezier(0.17, 0.67, 0.12, 0.99);
+    }
+  }
+
+  // Element: Spin Button
+  &__spin-button {
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 1000 !important;
+    border-radius: 50% !important;
+    width: 100px !important;
+    height: 100px !important;
+    min-width: auto !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    box-shadow: 0 6px 20px $shadow-medium !important;
+    pointer-events: auto !important;
+    cursor: pointer !important;
+
+    &:hover:not(:disabled) {
+      transform: translate(-50%, -50%) scale(1.1) !important;
+    }
+
+    &:active:not(:disabled) {
+      transform: translate(-50%, -50%) scale(0.95) !important;
+    }
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  // Element: Dialog
+  &__dialog {
+    .MuiDialog-paper {
+      border-radius: 16px;
+      padding: 10px;
+      margin: 20px;
+    }
+  }
+
+  // Element: Dialog Title
+  &__dialog-title {
+    text-align: center !important;
+    font-size: 24px !important;
+    font-weight: bold !important;
+    padding-top: 30px !important;
+  }
+
+  // Element: Dialog Content
+  &__dialog-content {
+    text-align: center !important;
+    padding: 20px 30px !important;
+  }
+
+  // Element: Prize Text
+  &__prize-text {
+    font-size: clamp(22px, 5vw, 32px);
+    font-weight: bold;
+    margin-top: 10px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  // Element: Dialog Actions
+  &__dialog-actions {
+    justify-content: center !important;
+    padding: 20px 30px 30px !important;
+  }
+
+  // Element: Claim Button
+  &__claim-button {
+    font-size: 16px !important;
+    font-weight: bold !important;
+    border-radius: 8px !important;
+    padding: 12px 32px !important;
+    box-shadow: 0 4px 12px rgba($primary-color, 0.4) !important;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .wheel-of-fortune {
+    padding: 15px;
+
+    &__title {
+      margin-bottom: 30px;
+    }
+
+    &__game-area {
+      max-width: 90vw;
+    }
+
+    &__spin-button {
+      width: 90px !important;
+      height: 90px !important;
+      font-size: 13px !important;
+    }
+
+    &__pointer {
+      border-left-width: 15px;
+      border-right-width: 15px;
+      border-top-width: 30px;
+      top: -15px;
+    }
+
+    &__dialog-title {
+      font-size: 20px !important;
+      padding-top: 20px !important;
+    }
+
+    &__claim-button {
+      font-size: 14px !important;
+      padding: 10px 24px !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .wheel-of-fortune {
+    padding: 10px;
+
+    &__title {
+      margin-bottom: 20px;
+    }
+
+    &__game-area {
+      max-width: 95vw;
+    }
+
+    &__spin-button {
+      width: 70px !important;
+      height: 70px !important;
+      font-size: 11px !important;
+    }
+
+    &__dialog-content {
+      padding: 15px 20px !important;
+    }
+
+    &__dialog-actions {
+      padding: 15px 20px 20px !important;
+    }
+  }
+}
